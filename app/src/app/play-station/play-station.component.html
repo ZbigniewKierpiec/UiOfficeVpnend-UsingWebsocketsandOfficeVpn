@@ -1,0 +1,31 @@
+<div
+  [classList]="
+    nameComp == 'Playstation' ? 'animate__animated animate__fadeIn box' : 'box'
+  "
+  class="box"
+>
+  <div class="box__cont">
+    <div [ngStyle]="getPlaystation1()" class="box__cont__one">
+      <ng-container *ngFor="let item of playstation">
+        <div
+          [ngStyle]="{ background: storedMediaPlayer }"
+          *ngFor="let item of item.Elements"
+          class="box__cont__one__item"
+        >
+          <img [src]="item.Icon" alt="" />
+        </div>
+      </ng-container>
+    </div>
+    <div [ngStyle]="getPlaystation2()" class="box__cont__two">
+      <ng-container *ngFor="let item of playstation3">
+        <div
+          [ngStyle]="{ background: storedMediaPlayer }"
+          *ngFor="let item of item.Elements"
+          class="box__cont__two__item"
+        >
+          <span><i class="{{ item.Icon }}" aria-hidden="true"></i></span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

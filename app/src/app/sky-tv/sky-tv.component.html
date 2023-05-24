@@ -1,0 +1,38 @@
+<div [classList]="nameComp == 'Sky-TV' ?'animate__animated animate__fadeIn box':''"   class="box">
+  <div class="box__cont">
+    <div [ngStyle]="getDotsGrid()" class="box__cont__colorDots">
+      <ng-container *ngFor="let item of Dots">
+        <div
+          *ngFor="let item of item.Elements"
+          [ngStyle]="{ background: item.Colour }"
+          class="box__cont__colorDots__items box__cont__colorDots__items"
+          (click)="checkDots(item)"
+        >
+          <!-- {{ item.ElementId }} -->
+        </div>
+      </ng-container>
+    </div>
+
+    <div [ngStyle]="getDialGrid()" class="box__cont__dial">
+      <ng-container *ngFor="let item of Dial">
+        <div (click)="dialCheck(item)" *ngFor="let item of item.Elements"    class="box__cont__dial__item">
+          <div class="box__cont__dial__item__top">
+            <p>{{item.Label}}</p>
+          </div>
+          <div class="box__cont__dial__item__bottom">
+            <p>{{item.SecondaryLabel}}</p>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+      <ng-container *ngFor="let item of Player">
+
+        <div    [ngStyle]="getDialPlayer()"     class="box__cont__player">
+          <div (click)="checkPlayer(item)" *ngFor="let item of item.Elements"  class="box__cont__player__item">
+            <span><i class="{{ item.Icon }}" aria-hidden="true"></i></span>
+          </div>
+         </div>
+      </ng-container>
+
+  </div>
+</div>

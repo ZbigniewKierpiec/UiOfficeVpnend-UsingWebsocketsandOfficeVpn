@@ -1,0 +1,244 @@
+<div [ngStyle]="{ background: storedTheme }" class="box">
+  <!-- <div [class.active]="settings" class="box__menda">
+
+<h1>Welcome Krytian</h1>
+<div class="box__menda__frame">
+
+<img src="/assets/png-transparent-gollum-the-lord-of-the-rings-the-fellowship-of-the-ring-mask-costume-mask-face-halloween-costume-head-thumbnail.png" alt="">
+
+
+</div>
+
+  </div> -->
+  <div (click)="logOut()" [class.active]="avatar" class="box__avatar">
+    <div class="box__avatar__item">
+      <!-- <span><i class="fa-regular fa-user"></i></span> -->
+      <!-- <img src="/assets/photo-1633332755192-727a05c4013d.jpeg" alt="" /> -->
+      <img src="{{ avatarPicture }}" alt="" />
+    </div>
+
+    <!-- <h1>{{ activeUser }}</h1> -->
+
+    <div class="box__avatar__name">
+      <span>{{ activeUser }}</span>
+    </div>
+  </div>
+
+  <div (click)="active()" class="box__settings">
+    <i
+      [class.active]="settings"
+      [ngStyle]="{ color: storedSettingsIconColor }"
+      class="fa-solid fa-gear"
+    ></i>
+  </div>
+
+  <div [class.active]="theme" class="box__theme">
+    <div
+      (click)="
+        setColor(
+          item.name,
+          item.device,
+          item.settingsIcon,
+          item.mediaPlayer,
+          item.font
+        )
+      "
+      [ngStyle]="{ background: item.name }"
+      *ngFor="let item of color"
+      class="box__theme__item box__theme__item--green"
+    ></div>
+  </div>
+
+  <div class="box__clock">
+    <span>{{ dataTime | date : "HH:mm" }}</span>
+  </div>
+  <div class="box__users">
+    <div class="box__users__info"><span>Login users</span></div>
+
+    <li *ngFor="let item of logInUsers" class="box__users__item"></li>
+  </div>
+  <form [formGroup]="loginForm" class="box__form">
+    <div class="box__form__item">
+      <div class="box__form__item__top">
+        <span class="fa fa-user"></span>
+      </div>
+      <div class="box__form__item__bottom">
+        <input
+          formControlName="Username"
+          placeholder="Username"
+          class="box__form__item__bottom__input one"
+          type="text"
+        />
+      </div>
+    </div>
+    <div class="box__form__item">
+      <div class="box__form__item__top">
+        <span
+          [class.active]="isText"
+          (click)="showPass()"
+          class="{{ lock }}"
+        ></span>
+      </div>
+      <div class="box__form__item__bottom">
+        <input
+          formControlName="Password"
+          placeholder="Password"
+          [type]="type"
+          class="box__form__item__bottom__input two"
+          type="text"
+        />
+      </div>
+    </div>
+    <!-- <div class="box__form__item    ">
+      <div class="box__form__item__top">
+        <span class="fa-solid fa-message"></span>
+      </div>
+      <div class="box__form__item__bottom">
+        <input
+          formControlName="MessageType"
+          placeholder="MessageType"
+          value="12"
+          class="box__form__item__bottom__input "
+          type="text"
+        />
+      </div>
+    </div> -->
+    <div class="box__form__item">
+      <button [disabled]="dis" type="submit" (click)="log()" class="button">
+        Login
+      </button>
+    </div>
+  </form>
+  <div [class.active]="tip" class="wraper">
+    <span>Log off first</span>
+  </div>
+
+  <div [class.active]="welcome" class="box__welcome">
+    <h1>
+      Welcome <span>{{ activeUser }}</span>
+    </h1>
+  </div>
+  <div [class.active]="notValid" class="box__toast">
+    <div class="box__toast__x">
+      <span (click)="close()"> <i class="fa-solid fa-xmark"></i> </span>
+    </div>
+    <h1>Form is not Valid</h1>
+  </div>
+  <!-- <app-login></app-login> -->
+  <!-- <div *ngIf="isLoged" class="row">
+    <div class="column">
+      <input placeholder="MessageType" [(ngModel)]="MessageType" type="text" />
+      <br />
+      <input placeholder="QueryType" [(ngModel)]="QueryType" type="text" />
+      <br />
+      <button [disabled]="!MessageType || !QueryType" (click)="sendMsg()">
+        Send Message
+      </button>
+    </div>
+  </div> -->
+  <br />
+  <!-- <div>
+    <h2>Sent Messages</h2>
+    <br />
+    <ul>
+      <li *ngFor="let item of sent">
+        Source: {{ item.source }} -> Content {{ item.content }}
+      </li>
+    </ul>
+  </div> -->
+
+  <br />
+  <!-- <div>
+    <h2>Received Messages</h2>
+    <br />
+     <ul>
+      <li *ngFor="let item of received |async">
+        Source: {{ item.source }} -> Content {{ item.content }}
+      </li>
+    </ul>
+  </div>
+
+  <h2>Postman</h2> -->
+  <!-- <app-login></app-login> -->
+  <div (click)="changeArrow()" *ngIf="isLoged" class="box__roomLabel">
+    <div class="box__roomLabel__btn">
+      <span>Rooms</span>
+    </div>
+    <div class="box__roomLabel__icon">
+      <span> <i class="fa-solid fa-house-laptop"></i> </span>
+    </div>
+    <div class="box__roomLabel__arrow">
+      <i
+        [classList]="
+          !arrow ? 'fa-solid fa-caret-down ' : ' fa-solid fa-caret-up'
+        "
+      ></i>
+    </div>
+  </div>
+  <!-- *ngIf="isLoged" -->
+  <div
+    [classList]="
+      arrow
+        ? 'animate__animated animate__fadeInDown rooms'
+        : ' animate__animated animate__fadeOutUp  rooms'
+    "
+    class="rooms"
+  >
+    <div
+      [class.active]="isSame == item.Id"
+      (click)="check(item)"
+      [ngStyle]="{ 'font-family': storedFontFamily }"
+      *ngFor="let item of AvailableViews"
+      class="rooms__item"
+    >
+      <span [ngStyle]="{ 'font-family': storedFontFamily }">{{
+        item.Label
+      }}</span>
+    </div>
+  </div>
+
+  <app-sky-tv
+    [nameComp]="switchDevices"
+    *ngIf="switchDevices === 'Sky-TV'"
+  ></app-sky-tv>
+
+  <app-music-center
+    [nameComp]="switchDevices"
+    *ngIf="switchDevices === 'Music-Centre'"
+  ></app-music-center>
+
+  <app-media-player
+    [storedMediaPlayer]="storedMediaPlayer"
+    [storedFontFamily]="storedFontFamily"
+    [nameComp]="switchDevices"
+    *ngIf="switchDevices === 'Media-Player'"
+  ></app-media-player>
+
+  <app-play-station
+    [storedMediaPlayer]="storedMediaPlayer"
+    [nameComp]="switchDevices"
+    *ngIf="switchDevices === 'Playstation'"
+  ></app-play-station>
+</div>
+<div class="devices">
+  <div
+    [ngStyle]="{
+      background: storedDeviceColor,
+      'font-family': storedFontFamily
+    }"
+    (click)="devicesQuery(item)"
+    *ngFor="let item of CurrentViewId"
+    class="devices__items"
+    [class.active]="isSame2 === item.Label"
+    [ngClass]="
+      isSame != item.Label ? 'animate__animated animate__fadeInDown' : ''
+    "
+  >
+    {{ item.Label }}
+  </div>
+</div>
+<!-- </div> -->
+<!-- <div class="zbyszek">
+
+
+</div> -->

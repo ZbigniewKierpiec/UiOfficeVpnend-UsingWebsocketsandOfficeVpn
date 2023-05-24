@@ -1,0 +1,75 @@
+<div class="box">
+  <form [formGroup]="loginForm" class="form">
+    <!-- <h1>Login</h1> -->
+    <div class="form__cont">
+      <div class="form__cont__group1">
+        <small
+          class="text-danger"
+          *ngIf="
+            loginForm.controls['Username'].dirty &&
+            loginForm.hasError('required', 'Username')
+          "
+          >*Username is required</small
+        >
+        <div class="form__cont__group1__field">
+          <span class="fa fa-user"></span>
+          <input
+            formControlName="Username"
+            class="form__cont__group1__username"
+            placeholder="Username"
+            type="text"
+          />
+        </div>
+      </div>
+      <div class="form__cont__group2">
+        <small
+          *ngIf="
+            loginForm.controls['Password'].dirty &&
+            loginForm.hasError('required', 'Password')
+          "
+          class="text-danger"
+          >*Password is required</small
+        >
+        <div class="form__cont__group1__field">
+          <span class="fa fa-lock"></span>
+          <input
+            formControlName="Password"
+            [type]="type"
+            class="form__cont__group1__password"
+            placeholder="Password"
+            type="text"
+          />
+
+          <span
+            [class.active]="isText"
+            (click)="showPass()"
+            class="fa {{ eyeIcon }} pass"
+          ></span>
+        </div>
+      </div>
+
+      <div class="form__cont__group1">
+        <small
+          class="text-danger"
+          *ngIf="
+            loginForm.controls['Username'].dirty &&
+            loginForm.hasError('required', 'Username')
+          "
+          >*Username is required</small
+        >
+        <div class="form__cont__group1__field">
+          <span class="fa-solid fa-message"></span>
+          <input
+            formControlName="MessageType"
+            class="form__cont__group1__username"
+            placeholder="Message Type"
+            type="text"
+          />
+        </div>
+      </div>
+
+
+      <button   (click)="onSubmit()" [disabled]="loginForm.invalid" type="submit">Login</button>
+    </div>
+  </form>
+</div>

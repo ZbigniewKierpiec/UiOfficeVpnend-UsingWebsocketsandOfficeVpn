@@ -1,0 +1,12 @@
+<div     [classList]="nameComp == 'Music-Centre' ?'animate__animated animate__fadeIn box':'box'"         class="box">
+  <div class="box__cont">
+    <div [ngStyle]="getMusic()" class="box__cont__music">
+      <ng-container *ngFor="let item of music">
+        <div *ngFor="let item of item.Elements" class="box__cont__music__item">
+          <!-- <span>{{item.ElementId}}</span> -->
+          <span> <i class="{{ item.Icon }}" aria-hidden="true"></i> </span>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

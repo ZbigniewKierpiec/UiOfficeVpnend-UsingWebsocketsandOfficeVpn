@@ -1,0 +1,46 @@
+<div
+  [classList]="
+    nameComp == 'Media-Player' ? 'animate__animated animate__fadeIn box' : ''
+  "
+  class="box"
+>
+  <div class="box__cont">
+    <div [ngStyle]="getMediaGrid(1)" class="box__cont__one">
+      <ng-container *ngFor="let item of media">
+        <div
+          [ngStyle]="{ background: storedMediaPlayer }"
+          *ngFor="let item of item.Elements"
+          class="box__cont__one__item"
+        >
+          <img [src]="item.Icon" alt="" />
+        </div>
+      </ng-container>
+    </div>
+
+    <div [ngStyle]="getMediaGrid(2)" class="box__cont__two">
+      <ng-container *ngFor="let item of media2">
+        <div
+          [ngStyle]="{
+            background: storedMediaPlayer,
+            'font-family': storedFontFamily
+          }"
+          *ngFor="let item of item.Elements"
+          class="box__cont__two__item"
+        >
+          <p>{{ item.Label }}</p>
+        </div>
+      </ng-container>
+    </div>
+    <div [ngStyle]="getMediaGrid(3)" class="box__cont__three">
+      <ng-container *ngFor="let item of media3">
+        <div
+          [ngStyle]="{ background: storedMediaPlayer }"
+          *ngFor="let item of item.Elements"
+          class="box__cont__three__item"
+        >
+          <img [src]="item.Icon" alt="" />
+        </div>
+      </ng-container>
+    </div>
+  </div>
+</div>

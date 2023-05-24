@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+
+ }
+
+@import"/src/app/sass/abstracts/mixins";
+@import"/src/app/sass/abstracts/variable";
+@import"/src/app/sass/base/base";
